@@ -1,0 +1,133 @@
+{% extends "tvguia_app/base.html" %}
+{% load static %}
+
+{% block head_css_page %}
+    <link href="{% static 'css/swiper.min.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'css/panel.css' %}" rel="stylesheet" media="screen">
+{% endblock head_css_page %}
+{% block title %}TVGUIA{% endblock title %}
+{% block content %}
+    <script src="{% static 'js/swiper.min.js' %}"></script>
+
+    <div id="panelTv">
+        {% for canal in panel %}
+            <div class="row">
+            <div class="col-1  logo-tv-container">
+                <img class="logo-tv" src="{% static 'images/iconos/' %}{{ canal.icono }}"/>
+            </div>
+            <div class="col-11   swiper-container">
+
+            <div class="swiper-wrapper">
+
+                {% for programa in canal.programacion %}
+                    <script>
+                      console.log( '{{  programa.hora_fin}}','{{ hora_actual  }}' )
+                    </script>
+                    {% if  programa.hora_fin < hora_actual %}
+                        <div class="swiper-slide tipo-{{ programa.tipo }} past-content">
+                    {% elif  programa.hora_inicio > hora_actual %}
+                        <div class="swiper-slide tipo-{{ programa.tipo }} future-content">
+                    {% else %}
+                        <div class="swiper-slide tipo-{{ programa.tipo }} current-content">
+                    {% endif %}
+                <span class="duracion-total" hidden>{{ programa.duracion_total }}</span>
+                <div class="flex-item hora-card " id="{{ programa.hora_inicio|date:'H:i' }}">
+                    <span>{{ programa.hora_inicio|date:'H:i' }}-{{ programa.hora_fin|date:'H:i' }}</span>
+                    {% if  programa.imagen %}
+                        <div class="  poster-sm ">
+
+                            <img src="media/poster/{{ programa.imagen }}">
+
+                        </div>
+                    {% endif %}
+                </div>
+                <div class=" flex-item info-content">
+                    <span>{{ programa.titulo }}</span>
+                    {% if programa.descripcion %}
+                        <buton class="btn-warning btn btn-info">+info</buton>
+                        <span hidden
+                              id={{ programa.titulo }}"-descripcion">{{ programa.descripcion }}</span>
+                    {% else %}
+                        <span hidden id={{ programa.titulo }}"-descripcion">No hay información</span>
+                    {% endif %}
+
+                </div>
+                </div>
+                {% endfor %}
+                </div>
+
+
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+
+        {% block footer_javascript_page %}
+
+            <!--<script src="{% static 'js/main.js' %}"></script>-->
+
+        {% endblock footer_javascript_page %}
+        <!-- Initialize Swiper -->
+        <script>
+            function goToCurrent() {
+                /*
+                * function that will go to the current slide
+                * Params: row, the row where it will act
+                * Returns: nothing,move the row to the current slide
+                * */
+                let anchura_total = 0;
+                //get current element
+                $(".swiper-wrapper").each(function () {
+                    anchura_total = 0;
+                    $(this).children(".swiper-slide").each(function (index,element) {
+                        if ($(this).hasClass("current-content")) {
+                            $(this).parent(".swiper-wrapper").css("transform", "translate3d(-"+anchura_total+"px, 0px, 0px)");
+                            return false;
+                        } else {
+                            anchura_total += $(this).width();
+                        }
+                    });
+                });
+            }
+        </script>
+        <script>
+            function resizePanel() {
+                $(".swiper-slide").each(function () {
+                    let duracion = $(this).find(".duracion-total").text();
+                    let anchura_web = window.innerWidth;
+                    let anchura = 2 + "em"
+                    if (anchura_web < 600) {
+                        anchura = (duracion / 3) + "em"
+                    } else if (anchura_web > 600 && anchura_web < 900) {
+                        anchura = (duracion / 3) + "em"
+                    } else if (anchura_web > 900 && anchura_web < 1024) {
+                        anchura = (duracion / 3) + "em"
+                    } else if (anchura_web > 1024) {
+                        anchura = (duracion / 3) + "em"
+                    }
+                    $(this).css("width", anchura)
+                });
+            }
+
+            $(document).ready(function () {
+                var swiper = new Swiper('.swiper-container', {
+                    slidesPerView: 'auto',
+                    freeMode: true,
+                    spaceBetween: 30,
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                        renderBullet: function (index, className) {
+                            return '<span class="' + className + " " + (index + 1) + '">' + (index + 1) + '</span>';
+                        },
+                    }
+                });
+                resizePanel();
+                goToCurrent();
+
+
+            });
+
+            window.onresize = resizePanel;
+        </script>
+{% endblock %}

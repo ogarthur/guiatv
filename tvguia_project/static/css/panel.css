@@ -1,0 +1,168 @@
+#line-hour {
+    position: absolute;
+    display: block;
+    height: 600px;
+    margin-left: 0em;
+    z-index: 99;
+    border-left: 6px solid green;
+}
+
+/****SWIPER******/
+/***************/
+.swiper-pagination {
+    /* display: none;*/
+    background-color: red;
+    height: 5em;
+}
+
+.swiper-pagination-bullet {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    color: #000;
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.swiper-pagination-bullet-active {
+    color: #fff;
+    background: #007aff;
+}
+
+.swiper-slide {
+    font-size: 1.7rem;
+    background: var(--c-three);
+    color: var(--c-one);
+    /* Center slide text vertically */
+    -ms-box-orient: horizontal;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    margin-right: 2px !important;
+    cursor: pointer;
+    word-wrap: break-word;
+
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: flex-start;
+
+}
+
+/*********************************/
+.btn-info {
+    font-size: 1.7rem;
+    font-weight: bold;
+}
+
+.flex-item {
+
+}
+
+.info-content {
+    flex-grow: 3;
+}
+
+.hora-card {
+    flex-grow: 1;
+    align-self: flex-start;
+    font-size: 1rem !important;
+    text-align: left !important;
+
+}
+
+.poster-sm img {
+
+    max-height: 150px;
+    max-width: 150px;
+    min-height: 100px;
+    min-width: 100px;
+    width: 100%;
+    height: 100%;
+}
+
+
+.logo-tv-container {
+    display: block;
+    margin: auto;
+}
+
+.logo-tv {
+    width: 100%;
+    max-width: 200px;
+}
+
+
+.tipo-otros, .tipo-pelicula, .tipo-serie, .tipo-noticia, .tipo-documental, .tipo-deporte, .tipo-infantil {
+    border: 2px solid;
+}
+
+.tipo-otros {
+    border-color: aquamarine;
+}
+
+.tipo-pelicula {
+    border-color: coral;
+}
+
+.tipo-serie {
+    border-color: indianred;
+}
+
+.tipo-noticia {
+    border-color: darkblue;
+}
+
+.tipo-documental {
+    border-color: forestgreen;
+}
+
+.tipo-deporte {
+    border-color: mediumpurple;
+}
+
+.tipo-infantil {
+    border-color: yellow;
+}
+
+.past-content {
+    opacity: 0.5;
+}
+
+.current-content div {
+    font-weight: bold;
+    color: var(--c-two) !important;
+
+}
+
+.future-content {
+    opacity: 0.9;
+}
+
+/**/
+
+/**/
+/*600 px RESPONSSSSIVVVEEE*/
+@media only screen and (max-width: 600px) {
+    .poster-sm img {
+        width: 55px;
+        height: 55px;
+    }
+
+    .swiper-slide {
+        font-size: 1rem;
+        margin-right: 1px !important;
+
+    }
+
+    .hora-card {
+        font-size: 1rem !important;
+        text-align: left !important;
+    }
+}

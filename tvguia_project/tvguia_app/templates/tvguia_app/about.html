@@ -1,0 +1,20 @@
+{% extends "tvguia_app/base.html" %}
+{% load static %}
+{% block head_css_page %}
+    <link href="{% static 'css/swiper.min.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'css/panel.css' %}" rel="stylesheet" media="screen">
+{% endblock head_css_page %}
+{% block title %}ABOUT{% endblock title %}
+{% block content %}
+
+
+    <div id="about-content">
+    <p>Esta página trata de conseguir ser una guia de tv lo mas minimalista y clara posible para cuando el usuario quiere unicamente ver que ponen hoy/ahora.
+
+    </p>
+
+    </div>
+    {% block footer_javascript_page %}
+    {% endblock footer_javascript_page %}
+
+{% endblock %}
